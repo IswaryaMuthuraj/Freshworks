@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Country Explorer</title>
+<meta name="viewport" content="width=device-width, initial scale=1.0"/>
+</head>
+<body>
+<center>
+<h1>COUNTRY EXPLORER!!!</h1>
+<form>
+<b><p style="font-size:20px">Enter the country name</p></b>
+<input type="text" id="countryname"/>
+<button onclick="myfun()">Explore</button>
+</form>
+<script language="javascript">
+function myfun()
+{
+var i=0;
+var str=document.getElementById("countryname").value;
+const url="https://restcountries.eu/rest/v2/name/"+str;
+fetch(url)
+.then((resp=>resp.json())
+.then(function(data){
+for(i in data)
+{
+var sect=document.createElement("div");
+sect.className="sect";
+var node=document.createElement("h1");
+var textnode=document.createTextNode(data[i].name);
+node.appendChild(textnode);
+var img=document.createElement("img");
+img.setAttribute("src","data[i].flag");
+img.setAttribute("height","50px");
+img.setAttribute("width","50px");
+node.appendChild(img);
+document.getElementByClassName("sect").appendChild(node);
+}
+})
+.catch(function(error){
+console.log(error);
+});
+}
+</script>
+</center>
+</body>
+<html>
